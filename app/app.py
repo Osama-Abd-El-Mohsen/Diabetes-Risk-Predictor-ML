@@ -13,8 +13,8 @@ st.set_page_config(
 # ── Load model ────────────────────────────────────────────────────────────────
 model = joblib.load("model/diabetes_pipeline.pkl")
 
-MODEL_METRICS = {"Recall": 81.5, "AUC": 82.61}
-THRESHOLD = 0.45
+MODEL_METRICS = {"Recall": 81.5, "AUC": 83.06}
+THRESHOLD = 0.35
 
 # ── Global CSS ────────────────────────────────────────────────────────────────
 st.markdown(
