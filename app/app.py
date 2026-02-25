@@ -292,6 +292,11 @@ st.markdown(
     .cat-obese  { background: rgba(239,68,68,0.2);   color: #f87171; }
 
     /* ---- BMI mode toggle (radio as pill switcher) ---- */
+    div[data-testid="stRadio"] { 
+        display: flex !important; 
+        justify-content: center !important;
+        width: 100% !important;
+    }
     div[data-testid="stRadio"] > label { display: none !important; }
     div[data-testid="stRadio"] > div {
         flex-direction: row !important;
