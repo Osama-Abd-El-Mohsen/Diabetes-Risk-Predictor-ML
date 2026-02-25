@@ -11,11 +11,12 @@ bmi = st.number_input("BMI")
 age = st.number_input("Age")
 pregnancies = st.number_input("Pregnancies")
 
+threshold = 0.45
 if st.button("Predict"):
     data = np.array([[glucose, bmi, age, pregnancies]])
-    prediction = model.predict(data)
-    print(data)
-    print(prediction)
+    prediction = model.predict_proba(data)[:,1]
+    prediction = (prediction >= threshold) 
+
     if prediction[0] == 1:
         st.error("High Risk")
     else:
