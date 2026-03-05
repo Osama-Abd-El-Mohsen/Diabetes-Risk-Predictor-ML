@@ -1,1 +1,28 @@
-name: Scheduled Empty Commit\n\nschedule:\n  - cron: '0 */12 * * *'\n\nworkflow_dispatch:\n\njobs:\n  empty_commit:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout Repository\n        uses: actions/checkout@v2\n      - name: Configure Git\n        run: |\n          git config --global user.name 'github-actions[bot]'\n          git config --global user.email 'github-actions[bot]@users.noreply.github.com'\n      - name: Create Empty Commit\n        run: |\n          git commit --allow-empty -m 'chore: scheduled empty commit'\n          git push\n
+name: Empty commit
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create empty commit and push
+        run: |
+          git commit --allow-empty -m "chore: scheduled empty commit"
+          git push
