@@ -1,4 +1,4 @@
-name: Empty commit
+name: Refresh Website
 
 on:
   schedule:
@@ -11,18 +11,22 @@ permissions:
 jobs:
   commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
 
       - name: Configure git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "${{ secrets.MY_Name }}"
+          git config user.email "${{ secrets.MY_EMAIL }}"
 
-      - name: Create empty commit and push
+      - name: Update file
         run: |
-          git commit --allow-empty -m "chore: scheduled empty commit"
+          date > refresh.txt
+
+      - name: Commit and push
+        run: |
+          git add refresh.txt
+          git commit -m "Auto refresh $(date)"
           git push
